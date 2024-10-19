@@ -1,5 +1,3 @@
-# test_parser
-
 # Apteka April Parser
 
 ## Описание
@@ -10,8 +8,6 @@
 
 ### Требования
 
-- Docker
-- Docker Compose
 - Python 3.12
 - Poetry
 
@@ -19,12 +15,19 @@
 
 1. Клонируйте репозиторий:
 
-   ```bash
-   git clone https://github.com/yourusername/apteka_april_parser.git
+   git clone https://github.com/PoGen-dev/test_parser
    cd apteka_april_parser
 
 
----
+CREATE TABLE products (
+    product_id VARCHAR PRIMARY KEY,
+    name TEXT,
+    price NUMERIC,
+    special_price NUMERIC,
+    manufacturer TEXT,
+    country TEXT
+);
+
 
 ### **7. Стратегия обхода блокировок**
 
@@ -36,38 +39,3 @@
 - **Обработка ошибок:** Логируем ошибки и исключения для последующего анализа и улучшения парсера.
 
 **Обоснование выбора:** Эти методы позволяют эффективно собирать данные, минимизируя вероятность блокировки со стороны сервера и обеспечивая устойчивую работу парсера.
-
----
-
-## **Дополнительные задания**
-
-### **1. Уведомления через Telegram**
-
-#### **Реализация**
-
-- Используем библиотеку **python-telegram-bot**.
-- Создаем бота и получаем токен.
-- Добавляем в парсер отправку уведомлений при старте, завершении и возникновении ошибок.
-
-#### **Код**
-
-```python
-# В main.py
-import logging
-from telegram import Bot
-
-TELEGRAM_TOKEN = 'your-telegram-token'
-CHAT_ID = 'your-chat-id'
-
-def send_telegram_message(message):
-    bot = Bot(token=TELEGRAM_TOKEN)
-    bot.send_message(chat_id=CHAT_ID, text=message)
-
-if __name__ == '__main__':
-    try:
-        send_telegram_message('Парсер запущен')
-        run_spider(args.city_ids)
-        send_telegram_message('Парсер успешно завершен')
-    except Exception as e:
-        logging.error(f'Ошибка: {e}')
-        send_telegram_message(f'Ошибка при работе парсера: {e}')
