@@ -15,30 +15,30 @@
 
 ### Шаги установки
 
-1. Клонируйте репозиторий:
+1. Клонирование репозитория:
 
    git clone https://github.com/PoGen-dev/test_parser
 
-2. Устанавливаем все библиотеки через poetry
+2. Установка всех библиотеки через poetry
 
-3. Скачать chromedriver и chrome для Вашей OS с https://googlechromelabs.github.io/chrome-for-testing/
+3. Скачивание chromedriver и chrome для Вашей OS с https://googlechromelabs.github.io/chrome-for-testing/
 
-4. Создать в корневой папке проекта папку resourse и переместить туда папки из zip архивой от chromedriver и chrome
+4. Создание в корневой папке проекта папку resourse и перемещение туда папки из zip архивой от chromedriver и chrome
 
-5. Установить и развернуть RabbitMQ и Postgres
+5. Установка и развёртка RabbitMQ и Postgres
 
-6. Создать базу данных в Postgres с названием products_db. Создать таблицу в бд
+6. Создание базы данных в Postgres с названием products_db. Создание таблицы в бд
 
 
-```sql -- CREATE TABLE products (product_id VARCHAR PRIMARY KEY,name TEXT,price NUMERIC,special_price NUMERIC,manufacturer TEXT,country TEXT);```
+```CREATE TABLE products (product_id VARCHAR PRIMARY KEY,name TEXT,price NUMERIC,special_price NUMERIC,manufacturer TEXT,country TEXT);```
 
-7. Запускаем парсер используя команду (не забудьте передать id городов)
+7. Запуск парсер используя команду (не забудьте передать id городов)
 
-```bash -- poetry run python main -c 1 721```
+```poetry run python main -c 1 721```
 
-8. Запускаем FastStream используя команду
+8. Запуск FastStream используя команду
 
-```bash -- poetry run python faststream_service\faststream_main.py```
+```poetry run python faststream_service\faststream_main.py```
 
 ### Стратегия обхода блокировок
 
