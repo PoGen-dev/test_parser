@@ -20,6 +20,6 @@ class Product(BaseModel):
     product_id: str
     name: str
     price: float
-    special_price: float = None
+    special_price: float
     manufacturer: str
     country: str

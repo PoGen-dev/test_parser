@@ -16,7 +16,8 @@ class ProductsSpider(scrapy.Spider):
     def start_requests(self):
         for city_id in self.city_ids:
             for type_id in self.types_ids:
-                url = f"https://web-api.apteka-april.ru/catalog/ID,price,name,properties,@products?typeIDs={type_id}&cityID={city_id}"
+                url = f"https://web-api.apteka-april.ru/catalog/ID,price,name,properties,@products?typeIDs={
+                    type_id}&cityID={city_id}"
                 yield scrapy.Request(
                     url, callback=self.parse, meta={"city_id": city_id}
                 )
@@ -51,7 +52,8 @@ class ProductsSpider(scrapy.Spider):
 
             try:
                 validated_product = Product(**item)
-                yield validated_product.model_dump()  # Или validated_product.json() для JSON-выхода
+                # Или validated_product.json() для JSON-выхода
+                yield validated_product.model_dump()
             except ValidationError as e:
                 self.logger.error(f"Validation data error: {e}")
             yield item

@@ -9,6 +9,7 @@ import pika
 import json
 from itemadapter import ItemAdapter
 
+
 class RabbitMQPipeline:
     def __init__(self, rabbitmq_url, queue_name):
         self.rabbitmq_url = rabbitmq_url
