@@ -10,26 +10,37 @@
 
 - Python 3.12
 - Poetry
+- Postgres
+- RabbitMQ
 
 ### Шаги установки
 
 1. Клонируйте репозиторий:
 
    git clone https://github.com/PoGen-dev/test_parser
-   cd apteka_april_parser
+
+2. Устанавливаем все библиотеки через poetry
+
+3. Скачать chromedriver и chrome для Вашей OS с https://googlechromelabs.github.io/chrome-for-testing/
+
+4. Создать в корневой папке проекта папку resourse и переместить туда папки из zip архивой от chromedriver и chrome
+
+5. Установить и развернуть RabbitMQ и Postgres
+
+6. Создать базу данных в Postgres с названием products_db. Создать таблицу в бд
 
 
-CREATE TABLE products (
-    product_id VARCHAR PRIMARY KEY,
-    name TEXT,
-    price NUMERIC,
-    special_price NUMERIC,
-    manufacturer TEXT,
-    country TEXT
-);
+```sql -- CREATE TABLE products (product_id VARCHAR PRIMARY KEY,name TEXT,price NUMERIC,special_price NUMERIC,manufacturer TEXT,country TEXT);```
 
+7. Запускаем парсер используя команду (не забудьте передать id городов)
 
-### **7. Стратегия обхода блокировок**
+```bash -- poetry run python main -c 1 721```
+
+8. Запускаем FastStream используя команду
+
+```bash -- poetry run python faststream_service\faststream_main.py```
+
+### Стратегия обхода блокировок
 
 Мы используем следующие методы для обхода блокировок:
 
