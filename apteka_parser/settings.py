@@ -95,10 +95,3 @@ ITEM_PIPELINES = {
 # RabbitMQ
 RABBITMQ_URL = "amqp://guest:guest@localhost:5672/"
 RABBITMQ_QUEUE = "products"
-
-# PostgreSQL
-POSTGRES_USER = "postgres"
-POSTGRES_PASSWORD = "ваш_пароль"
-POSTGRES_DB = "products_db"
-POSTGRES_HOST = "localhost"
-POSTGRES_PORT = 5432

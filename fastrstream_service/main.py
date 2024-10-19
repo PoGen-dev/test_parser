@@ -2,7 +2,7 @@ import asyncio
 import json
 import asyncpg
 import pika
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
 
 class Product(BaseModel):
@@ -32,14 +32,13 @@ async def save_to_db(pool, data):
 
 
 async def consume():
-    connection = pika.BlockingConnection(
-        pika.URLParameters("amqp://guest:guest@rabbitmq:5672/")
-    )
+    params = pika.URLParameters("amqp://guest:guest@localhost:5672/")
+    connection = pika.BlockingConnection(params)
     channel = connection.channel()
     channel.queue_declare(queue="products", durable=True)
 
     pool = await asyncpg.create_pool(
-        user="postgres", password="gena2000", database="products_db", host="postgres"
+        user="postgres", password="postgres", database="products_db", host="postgres"
     )
 
     def callback(ch, method, properties, body):
