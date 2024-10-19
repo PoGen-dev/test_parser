@@ -29,16 +29,25 @@
 
 6. Создание базы данных в Postgres с названием products_db. Создание таблицы в бд
 
-
 ```CREATE TABLE products (product_id VARCHAR PRIMARY KEY,name TEXT,price NUMERIC,special_price NUMERIC,manufacturer TEXT,country TEXT);```
 
-7. Запуск парсер используя команду (не забудьте передать id городов)
+7. (Опционально) Указать токен от телеграм бота и id чата куда необходимо присылать письма в \apteka_parser\settings.py
+
+8. Запуск парсер используя команду (не забудьте передать id городов)
 
 ```poetry run python main -c 1 721```
 
-8. Запуск FastStream используя команду
+9. Запуск FastStream используя команду
 
 ```poetry run python faststream_service\faststream_main.py```
+
+### Конфигурация RabbitMQ
+
+- RABBITMQ_URL = "amqp://guest:guest@localhost:5672/"
+- RABBITMQ_QUEUE = "products"
+- RABBITMQ_DEFAULT_USER = "guest"
+- RABBITMQ_DEFAULT_PASS = "guest"
+- PORT = 5672
 
 ### Стратегия обхода блокировок
 
@@ -50,3 +59,10 @@
 - **Обработка ошибок:** Логируем ошибки и исключения для последующего анализа и улучшения парсера.
 
 **Обоснование выбора:** Эти методы позволяют эффективно собирать данные, минимизируя вероятность блокировки со стороны сервера и обеспечивая устойчивую работу парсера.
+
+
+### Пример полученных данных
+
+- {"product_id": 291847, "name": "\u041d\u043e\u0441\u043a\u0438 \u0436\u0435\u043d\u0441\u043a\u0438\u0435 \u0441 \u043c\u0438\u0448\u043a\u0430\u043c\u0438 \u0440\u0430\u0437\u043c\u0435\u0440 23-25", "price": 87, "special_price": 87, "country": "\u0420\u043e\u0441\u0441\u0438\u044f", "manufacturer": "\u041e\u041e\u041e \"\u0410\u0432\u0440\u043e\u0440\u0430 \u0410\u043b\u0442\u0430\u044f\""}
+- {"product_id": 235471, "name": "\u041f\u043e\u0434\u0441\u043b\u0435\u0434\u043d\u0438\u043a\u0438 \u0436\u0435\u043d\u0441\u043a\u0438\u0435 \u0441\u0435\u0440\u044b\u0435 \u0440.23-25", "price": 78, "special_price": 78, "country": "\u0420\u043e\u0441\u0441\u0438\u044f", "manufacturer": "\u0410\u041e \"\u0411\u043e\u0440\u0438\u0441\u043e\u0433\u043b\u0435\u0431\u0441\u043a\u0438\u0439 \u0442\u0440\u0438\u043a\u043e\u0442\u0430\u0436\""}
+- {"product_id": 235472, "name": "\u041f\u043e\u0434\u0441\u043b\u0435\u0434\u043d\u0438\u043a\u0438 \u0436\u0435\u043d\u0441\u043a\u0438\u0435 \u0447\u0435\u0440\u043d\u044b\u0435 \u0440.23-25", "price": 78, "special_price": 78, "country": "\u0420\u043e\u0441\u0441\u0438\u044f", "manufacturer": "\u0410\u041e \"\u0411\u043e\u0440\u0438\u0441\u043e\u0433\u043b\u0435\u0431\u0441\u043a\u0438\u0439 \u0442\u0440\u0438\u043a\u043e\u0442\u0430\u0436\""}

@@ -17,7 +17,7 @@ class ProductItem(Item):
 
 
 class Product(BaseModel):
-    product_id: str
+    product_id: int
     name: str
     price: float
     special_price: float

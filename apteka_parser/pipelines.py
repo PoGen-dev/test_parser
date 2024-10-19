@@ -34,6 +34,9 @@ class RabbitMQPipeline:
     def process_item(self, item, spider):
         adapter = ItemAdapter(item)
         message = json.dumps(adapter.asdict())
+        with open('example.json', 'a', encoding='utf-8') as f:
+            json.dump(adapter.asdict(), f)
+            f.write('\n')
         self.channel.basic_publish(
             exchange='',
             routing_key=self.queue_name,
