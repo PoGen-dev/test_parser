@@ -10,7 +10,7 @@ from selenium.webdriver.chrome.service import Service
 
 
 class SeleniumMiddleware:
-    def __init__(self):
+    def __init__(self) -> None:
         chrome_options = Options()
         chrome_options.binary_location = "resourse/chrome-win64/chrome.exe"
         servise = Service(
@@ -19,11 +19,23 @@ class SeleniumMiddleware:
         self.driver = webdriver.Chrome(service=servise, options=chrome_options)
 
     def process_request(self, request, spider) -> HtmlResponse:
+        """
+        Capture url for parse by spider and get by webdriver
+
+        :param request:
+        :param spider:
+        :return HtmlResponse:
+        """
         self.driver.get(request.url)
         body = self.driver.page_source
         return HtmlResponse(
             self.driver.current_url, body=body, encoding="utf-8", request=request
         )
 
-    def __del__(self):
+    def __del__(self) -> None:
+        """
+        Close webdriver connection
+
+        :return None:
+        """
         self.driver.quit()

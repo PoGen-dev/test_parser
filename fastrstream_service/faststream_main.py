@@ -14,7 +14,14 @@ class Product(BaseModel):
     country: str
 
 
-async def save_to_db(pool, data):
+async def save_to_db(pool, data) -> None:
+    """
+    Save items from RabbitMQ to Postgres
+
+    :param pool:
+    :param data:
+    :return None:
+    """
     async with pool.acquire() as connection:
         await connection.execute(
             """
@@ -31,7 +38,13 @@ async def save_to_db(pool, data):
         )
 
 
-async def consume():
+async def consume() -> None:
+    """
+    Start working FastStream. Connect to RabbitMQ and wait item
+    for saving. Send item to save
+
+    :return None:
+    """
     params = pika.URLParameters("amqp://guest:guest@localhost:5672/")
     connection = pika.BlockingConnection(params)
     channel = connection.channel()

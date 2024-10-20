@@ -11,12 +11,19 @@ from ..telegram import send_telegram_message
 class ProductsSpider(scrapy.Spider):
     name = "products"
 
-    def __init__(self, city_ids: List[int], type_ids: List[int], *args, **kwargs):
+    def __init__(
+        self, city_ids: List[int], type_ids: List[int], *args, **kwargs
+    ) -> None:
         super().__init__(*args, **kwargs)
         self.city_ids = city_ids
         self.types_ids = type_ids
 
     def start_requests(self) -> Generator:
+        """
+        Parse api of apteka-april depends on city_id and type_id
+
+        :return Generator:
+        """
         for city_id in self.city_ids:
             for type_id in self.types_ids:
                 send_telegram_message(
@@ -40,7 +47,8 @@ class ProductsSpider(scrapy.Spider):
 
     def parse(self, response) -> Generator:
         """
-        Parse response and getting goal points.
+        Parse response and getting product_id, name,
+        price, special_price, manufacturer, country
 
         :param response:
         :return Generator:
